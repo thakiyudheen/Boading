@@ -11,4 +11,3 @@ Datas.prototype.getData = function (){
 const data = new Datas('thakiyudheen',20)
 data.getData()
 
-
