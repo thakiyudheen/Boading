@@ -1,8 +1,8 @@
 import {  lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import UseCallback from './component/useCallback'
-const Sample = lazy(()=>import('./component/sample'));
-import ErrorBoundary from './component/ErrorBoudary'
+// const Sample = lazy(()=>import('./component/sample'));
+// import ErrorBoundary from './component/ErrorBoudary'
 
 
 
@@ -22,6 +22,8 @@ function App  () {
   //   return () => clearInterval(intervalId);
   // }, [count]);\
 
+
+
   const exp = useMemo(() =>{
     for(let i=0;i<1000000000;i++){
 
@@ -30,18 +32,30 @@ function App  () {
     return count%2==0 
   },[count])
 
+const [input,setInput]=useState('')
+
+const [filtered,setFilter]=useState<any>([])
+
+useEffect(()=>{
+  console.log("ok");
+  console.log(input);
+  
+  var contries=['italy','india','brazil','pakistan']
+   
+  setFilter(contries.filter((el)=> el.startsWith(input)))
+  console.log('this is the data',filtered);
+  
+},[input])
+
 return (
   <>
-    <div>
-      <ErrorBoundary
-      <h1>
-        
-      {exp?'hi':'hekki'}
-      </h1>
-
-      <button onClick={()=>setCount(pre=>pre+1)}>{count}</button>
-      <button onClick={()=>setCount2(pre=>pre+1)}>{count2}</button>
-    </div>
+  <input type="text" onChange={(e)=>setInput(e.target.value)} className='bg-white py-3 ' />
+   <ul>
+    {filtered.map((el:any)=>
+      (<li>{el}</li>)
+    )}
+    
+   </ul>
   </>
 )
 }
