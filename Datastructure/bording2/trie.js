@@ -31,6 +31,7 @@ class trie{
         }
         return node.isEnd
     }
+    
     longest(word){
          let node=this.root
          let prefix=''
@@ -97,13 +98,27 @@ class trie{
          this.completioin(node.child[char],word+char,items)
        }
     }
+    suffix(word){
+        for(let i=0;i<word.length;i++){
+            let node = this.root;
+            for(let j=i;j<word.length;j++){
+                let char=word[j]
+                if(!node.child[char]){
+                    node.child[char]= new nodes()
+                }
+                node=node.child[char]
+            }
+        }
+    }
   
 }
 
 let tr= new trie()
-tr.insert('thakiyudheen')
-tr.insert('thakinjnjn')
-tr.insert('thajudheen')
-console.log(tr.search('thakiyudhee'));
-console.log(tr.longest('thaksdfasfda'));
-console.log(tr.auto('tha'));
+// tr.insert('thakiyudheen')
+// tr.insert('thakinjnjn')
+// tr.insert('thajudheen')
+tr.suffix('thajudheen')
+console.log(tr.search('thajudheen'));
+console.log(tr.search1('thajudheen'));
+// console.log(tr.longest('thajuksdfasfda'));
+// console.log(tr.auto('tha'));

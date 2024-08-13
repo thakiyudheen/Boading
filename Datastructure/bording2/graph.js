@@ -109,6 +109,41 @@ class graph {
         }
     }
 }
+bfssss(start){
+    if(!this.adlist[start]){
+        return null
+    }
+    let queue=[]
+    let visited={}
+    queue.push(start)
+    while(queue.length>0){
+        let current= queue.shift()
+        console.log(current);
+        for(let neighbor of this.adlist[current]){
+            if(!visited[neighbor]){
+                visited[neighbor]=true
+                queue.push(neighbor)  
+            }
+        }
+        
+    }
+}
+dfssss(start){
+    let visited={}
+    let stack =[]
+    stack.push(start)
+    while(stack.length){
+        let current= stack.pop()
+        if(!visited[current]){
+            console.log(current);
+            visited[current]=true
+            for(let neighbor of this.adlist[current]){
+                stack.push(neighbor)
+            }
+            
+        }
+    }
+}
 
 }
 
@@ -120,5 +155,5 @@ gr.addEdges('a','b')
 gr.addEdges('b','c')
 gr.addEdges('c','a')
 gr.print()
-gr.dfss('a')
+gr.dfssss('a')
 // gr.dfs('a')
