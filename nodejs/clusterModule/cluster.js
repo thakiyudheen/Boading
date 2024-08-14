@@ -22,23 +22,45 @@
 //     })
 // }
 
-const cluster= require('cluster')
+// const cluster= require('cluster')
+// const http = require('http')
+// const upu= require('os').cpus().length
+// if(cluster.isMaster){ 
+//     for(let i=0;i<upu;i++){
+//         cluster.fork()
+//     }
+//     cluster.on('exit',()=>{
+//         console.log('its exite');
+        
+//     })
+// }else{
+//     http.createServer((req,res)=>{
+        
+        
+//     }).listen(3000,()=>{
+//         console.log('this is working');
+        
+//     })
+// }
+
 const http = require('http')
-const upu= require('os').cpus().length
-if(cluster.isMaster){ 
-    for(let i=0;i<upu;i++){
+const cluster = require('cluster')
+const cpu = require('os').cpus().length
+
+if(cluster.isMaster){
+    for(let i=0;i<cpu;i++){
         cluster.fork()
     }
     cluster.on('exit',()=>{
-        console.log('its exite');
+        console.log('program cluster exited');
         
     })
+    
 }else{
     http.createServer((req,res)=>{
-        
-        
+        res.end('working')
     }).listen(3000,()=>{
-        console.log('this is working');
+        console.log('server is running');
         
     })
 }

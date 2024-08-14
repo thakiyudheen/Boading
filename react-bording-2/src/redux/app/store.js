@@ -11,13 +11,22 @@
 
 // export default store
 
-import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "../features/userSlice";
+// import { configureStore } from "@reduxjs/toolkit";
+// import userSlice from "../features/userSlice";
 
-const store= configureStore({
-    reducer:{
-        user : userSlice
-    }
-})
+// const store= configureStore({
+//     reducer:{
+//         user : userSlice
+//     }
+// })
 
-export default store
+// export default store
+
+// import { configureStore } from "@reduxjs/toolkit";
+// import userSlice from "../features/userSlice";
+
+// const store = configureStore({
+//     reducer:{
+//         count:userSlice
+//     }
+// })
