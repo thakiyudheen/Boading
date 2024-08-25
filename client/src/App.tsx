@@ -1,6 +1,7 @@
 import {  lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import UseCallback from './component/useCallback'
+import CommonButton from './component/commonButton'
 // const Sample = lazy(()=>import('./component/sample'));
 // import ErrorBoundary from './component/ErrorBoudary'
 
@@ -24,38 +25,11 @@ function App  () {
 
 
 
-  const exp = useMemo(() =>{
-    for(let i=0;i<1000000000;i++){
 
-    }
-    
-    return count%2==0 
-  },[count])
-
-const [input,setInput]=useState('')
-
-const [filtered,setFilter]=useState<any>([])
-
-useEffect(()=>{
-  console.log("ok");
-  console.log(input);
-  
-  var contries=['italy','india','brazil','pakistan']
-   
-  setFilter(contries.filter((el)=> el.startsWith(input)))
-  console.log('this is the data',filtered);
-  
-},[input])
 
 return (
   <>
-  <input type="text" onChange={(e)=>setInput(e.target.value)} className='bg-white py-3 ' />
-   <ul>
-    {filtered.map((el:any)=>
-      (<li>{el}</li>)
-    )}
-    
-   </ul>
+    <CommonButton textColor={'red'} size={'19px'} data={'button please'} />
   </>
 )
 }

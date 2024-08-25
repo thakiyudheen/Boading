@@ -369,39 +369,133 @@ class btree {
     }
     
 
-    // delete()
+    deleteDub(root){
+      let queue=[]
+      queue.push(root)
+      let set ={}
+      while(queue.length){
+        let current= queue.shift()
+        if(!set[current.value]){
+            set[current.value]=true
+        }else{
+            this.ok(root,current.value)
+        }
+        if(current.left){
+                queue.push(current.left)
+        }
+        if(current.right){
+                queue.push(current.right)
+          
+        }
+      }
+      return root
+    }
 
+    ok(root,value){
+        console.log('reassssss--------------------');
+        if(!root){
+            return null
+        }
+        if(value<root.value){
+            root.left=this.ok(root.left,value)
+        }else if(value>root.value){
+            root.right=this.ok(root.right,value)
+        }else{
+            if(!root.right&&!root.left){
+                return null
+            }else if(!root.left){
+                return root.right
+            }else if(!root.right){
+                return root.left
+            }
+    
+            root.value= this.min(root.right)
+            root.right= this.ok(root.right,root.value)
+        }
+        return root
+    
+       
+       
+    }
+    findHeight(root){
+        if(!root){
+            return 0
+        }
+
+        return 1+Math.max(this.findHeight(root.left),this.findHeight(root.right))
+    }
+    kthSmall (root,k){
+        let result=null
+        let count = 0;
+
+        function inorder(root){
+            if(!root||result!=null){
+                return 
+            }
+            inorder(root.right)
+            count++
+            if(count==k){
+                result=root.value
+                return 
+            }
+            inorder(root.left)
+        }
+        inorder(root)
+        return result
+    }
+
+    findlcAc(root,p,q){
+        if(root==null){
+            return null
+        }
+        
+        if(p<root.value&&q<root.value){
+            return this.findlcAc(root.left,p,q)
+        }
+
+        if(p>root.value&& q>root.value){
+            return this.findlcAc(root.right,p,q)
+        }
+
+        return root
+    }
 }
 
 
 const bt = new btree()
 const bt1 = new btree()
-bt.insert(10)
-bt.insert(11)
-bt.insert(11)
-bt.insert(11)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(12)
-bt.insert(19)
-bt.insert(39)
-bt.insert(40)
-bt.insert(70)
-bt.insert(56)
+bt1.insert(20);
+bt1.insert(10);
+bt1.insert(30);
+bt1.insert(5);
+bt1.insert(15);
+bt1.insert(40);
+bt1.insert(35);
+bt1.insert(45);
+
+let lca= bt.findlcAc(bt1.root,5,40)
+console.log('this is an sister',lca?lca.value:null);
+// console.log('this is an sister',lca?lca.value:null);
+
+// bt.insert(19)
+// bt.insert(39)
+// bt.insert(40)
+// bt.insert(70)
+// bt.insert(56)
 // bt.inorder(bt.root)
 // bt.delete(11)
 
 
+
+
 // bt.deletes(11)
-bt.dublicate(bt.root)
+// bt.dublicate(bt.root)
 bt.preorder(bt.root)
+console.log('this is smallest element',bt.kthSmall(bt.root,2));
+
+// console.log('this is hceight',bt.findHeight(bt.root));
+// bt.deleteDub(bt.root)
+
 // console.log(bt.isIdentical(bt.root, bt1.root));
 
 // bt.postorder(bt.root)
